@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {Routes, Route} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import {toast} from 'react-hot-toast';
+
+import Dashboard from './features/Dashboard';
+import Teachers from './features/teachers/Teachers';
+import Students from './features/students/Student';
+import Header from './component/Header';
+import Class from './features/class/Class';
+import ShowDetails from './component/ShowDetails';
+import ToasterComp from './component/Toaster';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const {error} = useSelector((state)=>state?.students)  
+  const {error:teacherError} = useSelector(state=> state?.teachers)
+  if(error||teacherError ){
+    toast.error(error?.message ?? teacherError.error ?? "Something went wrong")
+  }
+  
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+    <header>
+      <Header />
+    </header>
+    <main>
+  <Routes>
+    <Route path='/' element={<Dashboard />} />
+    <Route path='/teachers' element={<Teachers />} />
+    <Route path='/students' element={<Students />} />
+    <Route path="/class" element={<Class />  } />
+    <Route path='/:type/:id' element={<ShowDetails/>} />
+  </Routes>
+<ToasterComp />
+    </main>
+
+    </div>
+  );
 }
 
-export default App
+export default App;
