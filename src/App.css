@@ -5,17 +5,23 @@
   margin: 0;
   padding: 0;
 }
-
-.logo {
-  font-weight: 800;
-  text-shadow: 10px 5px 10px #111;
-  border-left: solid;
-  border-bottom: solid;
-  padding: 0.6rem;
+.header{
+  display: flex;
+  justify-content: space-between;
+  height: 4rem;
+  width: 100%;
 }
-
-.logo:hover {
-  cursor: crosshair;
+.logo {
+  display: flex;
+  justify-content: center;
+  height: 3.5rem;
+  width: 3.5rem;
+  align-items: center;
+  cursor: pointer;
+}
+.logo img{
+  height: 100%;
+  width: 100%;
 }
 
 header {
@@ -23,6 +29,7 @@ header {
   justify-content: space-between;
   padding: 0.5rem 1rem;
   align-items: center;
+  border-bottom: 1px solid black;
 }
 
 header nav {
@@ -36,6 +43,7 @@ header nav {
 header nav a {
   text-decoration: none;
   color: inherit;
+  font-weight: bold;
 }
 
 a:hover,
